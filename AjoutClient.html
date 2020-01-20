@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ajout Client</title>
+  </head>
+  <body>
+    <fieldset>
+      <legend>Inscription</legend>
+      <form method="get" action="GestionClient.php">
+        <table>
+          <tr>
+            <td>Nom:</td>
+            <td><input type="text" required placeholder="nom" name="nom" /></td>
+          </tr>
+          <tr>
+            <td>Prenom:</td>
+            <td>
+              <input type="text" required placeholder="prenom" name="prenom" />
+            </td>
+          </tr>
+          <tr>
+            <td>Age:</td>
+            <td>
+              <input type="number" required placeholder="age" name="age" />
+            </td>
+          </tr>
+          <tr>
+            <td>Adresse:</td>
+            <td>
+              <input type="text" required placeholder="adresse" name="adresse" />
+            </td>
+          </tr>
+          <tr>
+            <td>Telephone:</td>
+            <td>
+              <input type="text" required placeholder="tel" name="tel" />
+            </td>
+          </tr>
+          <tr>
+            <td>E-mail:</td>
+            <td>
+              <input type="text" required placeholder="mail" name="mail" />
+            </td>
+          </tr>
+          <tr>
+            <td>Cin:</td>
+            <td>
+              <input type="text" required placeholder="cin" name="cin" />
+            </td>
+          </tr>
+
+          <tr>
+            <td><input type="submit" value="ajouter" name="ajout" /></td>
+          </tr>
+        </table>
+      </form>
+      <form action="GestionClient.php">
+        <input type="submit" value="Afficher C" name="affiche" />
+      </form>
+      <form action="GestionClient.php">
+        <input type="submit" value="Afficher C Json" name="afficheJson" />
+      </form>
+      
+    </fieldset>
+  </body>
+</html>
