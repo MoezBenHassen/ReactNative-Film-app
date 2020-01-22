@@ -1,7 +1,7 @@
 // Components/Search.js
 
 import React from 'react'
-import { StyleSheet,View, TextInput, Button, FlatList, Text, Image } from 'react-native'
+import { StyleSheet,View, TextInput, Button, FlatList, Text, Image, ActivityIndicator, ProgressBarAndroid } from 'react-native'
 import films from '../Helpers/filmData'
 import FilmItem from './FilmItem'
 import {getFilmsFromApiWithSearchedText} from '../Api/TMDBApi'
@@ -10,24 +10,38 @@ class Search extends React.Component {
     constructor (props){
         super (props)
         this.state = { 
-            films: []
+            films: [],
+            isLoading: false
          }
          this.searchedText =""
     }
     _loadFilms() {
-        if (this.searchedText.length >0) {
-            getFilmsFromApiWithSearchedText(this.searchedText).then(data => this.setState({films: data.results}));
+        this.setState({ isLoading: true })
+        if (this.searchedText.length >0) { //if there's text in the search bar
+            getFilmsFromApiWithSearchedText(this.searchedText).then(data => this.setState({
+                films: data.results,
+                isLoading: false
+            }));
+        }
+    }
+    _displayLoading () {
+        if (this.state.isLoading){
+           return (
+                <View style={styles.loading_container}>
+                    <ActivityIndicator size='large' color='gray' />
+                </View>
+            );
         }
     }
     _searchTextInputChanged (text){
         this.searchedText = text
     }
     render() {
-        console.log ("RENDER")
+        console.log (this.state.isLoading)
         return (
             <View style={styles.main_container}>
             
-                <TextInput onChangeText={(text) => this._searchTextInputChanged(text)} style={styles.textinput} placeholder='Titre du film'/>
+                <TextInput  onSubmitEditing={ () => this._loadFilms() } onChangeText={(text) => this._searchTextInputChanged(text)} style={styles.textinput} placeholder='Titre du film'/>
                 <Button title='Rechercher' onPress={() => this._loadFilms()}/>
 
                 <FlatList
@@ -35,6 +49,7 @@ class Search extends React.Component {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => <FilmItem film={item} />}
                 />
+                {this._displayLoading()}
             </View>
         )
     }
@@ -53,6 +68,16 @@ class Search extends React.Component {
         borderWidth: 1,
         paddingLeft: 5
 
+        },
+        loading_container: {
+            paddingTop: 10,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top:100,
+            bottom: 0,
+            alignItems: 'center',
+            justifyContent: 'center'
         }
     })
 
