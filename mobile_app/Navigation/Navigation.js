@@ -9,11 +9,16 @@ const SearchStackNavigator = createStackNavigator({
   Search: { // Ici j'ai appelé la vue "Search" mais on peut mettre ce que l'on veut. C'est le nom qu'on utilisera pour appeler cette vue
     screen: Search,
     navigationOptions: {
-      title: 'Rechercher'
+      title: 'Rechercher',
+      //headerTintColor: '#0073e5'
     }
   },
   FilmDetail: {
-    screen: FilmDetail
+    screen: FilmDetail,
+    navigationOptions: {
+      title: 'Film Details',
+      //headerTintColor: '#0073e5'
+    }
   }
 })
 
